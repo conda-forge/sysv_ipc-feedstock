@@ -1,5 +1,5 @@
 {% set name = "sysv_ipc" %}
-{% set version = "1.0.0" %}
+{% set version = "1.0.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,11 +7,11 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: cd70548a92218ede2da499080b31e52f1d7cf60716c5cc7d468ec89e8b73c530
+  sha256: 8eff10dd17789ddf21b422ce46ae0f6420088902a88e4296cb805cf2fde8b4dc
 
 build:
-  number: 1000
-  script: python -m pip install --no-deps --ignore-installed .
+  number: 0
+  script: {{ PYTHON }} -m pip install . --no-deps -vv
   skip: True  # [win]
 
 requirements:
