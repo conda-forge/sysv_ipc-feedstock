@@ -8,9 +8,12 @@ package:
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 8eff10dd17789ddf21b422ce46ae0f6420088902a88e4296cb805cf2fde8b4dc
+  patches:
+    # AttributeError: module 'distutils.sysconfig' has no attribute 'get_config_h_filename'
+    - get_config_h_filename.patch
 
 build:
-  number: 1
+  number: 2
   script: {{ PYTHON }} -m pip install . --no-deps -vv
   skip: True  # [win]
 
