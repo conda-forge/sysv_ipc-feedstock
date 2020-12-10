@@ -1,0 +1,15 @@
+--- prober.py	2019-11-03 10:05:09.000000000 -0800
++++ prober.py	2020-12-10 14:29:15.000000000 -0800
+@@ -13,7 +13,11 @@
+ # This is the max length that I want a printed line to be.
+ MAX_LINE_LENGTH = 78
+ 
+-PYTHON_INCLUDE_DIR = os.path.dirname(distutils.sysconfig.get_config_h_filename())
++try:
++    PYTHON_INCLUDE_DIR = os.path.dirname(distutils.sysconfig.get_config_h_filename())
++except AttributeError:
++    import sysconfig
++    PYTHON_INCLUDE_DIR = os.path.dirname(sysconfig.get_config_h_filename())
+ # print(PYTHON_INCLUDE_DIR)
+ 
+ 
