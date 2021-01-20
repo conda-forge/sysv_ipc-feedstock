@@ -1,5 +1,5 @@
 {% set name = "sysv_ipc" %}
-{% set version = "1.0.1" %}
+{% set version = "1.1.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,15 +7,15 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 8eff10dd17789ddf21b422ce46ae0f6420088902a88e4296cb805cf2fde8b4dc
+  sha256: 0f063cbd36ec232032e425769ebc871f195a7d183b9af32f9901589ea7129ac3
   patches:
     # AttributeError: module 'distutils.sysconfig' has no attribute 'get_config_h_filename'
     - get_config_h_filename.patch
 
 build:
-  number: 3
+  number: 0
   script: {{ PYTHON }} -m pip install . --no-deps -vv
-  skip: True  # [win]
+  skip: true  # [win]
 
 requirements:
   build:
@@ -42,8 +42,7 @@ about:
   license: BSD-3-Clause
   license_family: BSD
   license_file: LICENSE
-  summary: 'Sysv_ipc gives Python programs access to System V semaphores, shared memory 
-and message queues'
+  summary: Sysv_ipc gives Python programs access to System V semaphores, shared memory and message queues
 
   description: |
     Sysv_ipc gives Python programs access to System V semaphores, shared memory 
