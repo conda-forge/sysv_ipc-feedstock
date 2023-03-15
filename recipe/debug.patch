@@ -13,11 +13,13 @@ diff --git a/tests/test_message_queues.py b/tests/test_message_queues.py
 index d65fb20..70f8857 100644
 --- a/tests/test_message_queues.py
 +++ b/tests/test_message_queues.py
-@@ -304,7 +304,7 @@ class TestMessageQueuePropertiesAndAttributes(MessageQueueTestBase):
+@@ -304,6 +304,8 @@ class TestMessageQueuePropertiesAndAttributes(MessageQueueTestBase):
          """exercise MessageQueue.last_receive_pid"""
          self.assertEqual(self.mq.last_receive_pid, 0)
          self.mq.send('x')
 -        self.mq.receive()
 +        print('recieved', self.mq.receive())
++        import platform
++        print(platform.architecture(), platform.machine())
          self.assertEqual(self.mq.last_receive_pid, os.getpid())
          self.assertWriteToReadOnlyPropertyFails('last_receive_pid', 42)
