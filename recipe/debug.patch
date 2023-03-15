@@ -6,7 +6,7 @@ index da50c2a..b3abb04 100644
          break;
  
          case SVIFP_MQ_LAST_RECEIVE_PID:
-+	    printf("msg_lrpid = %d\n", q_info.msg_lrpid);
++	    printf("msg_lrpid = %d, size = %zu\n", q_info.msg_lrpid, sizeof(pid_t));
              py_value = PID_T_TO_PY(q_info.msg_lrpid);
          break;
 diff --git a/tests/test_message_queues.py b/tests/test_message_queues.py
