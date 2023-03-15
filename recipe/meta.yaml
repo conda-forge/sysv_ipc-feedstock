@@ -11,9 +11,10 @@ source:
   patches:
     # AttributeError: module 'distutils.sysconfig' has no attribute 'get_config_h_filename'
     - get_config_h_filename.patch
+    - last_receive_pid_skip.patch
 
 build:
-  number: 5
+  number: 6
   script: {{ PYTHON }} -m pip install . --no-deps -vv
   skip: true  # [win]
 
@@ -39,7 +40,7 @@ test:
   requires:
     - nose
   commands:
-    - nosetests -svx --nologcapture tests/
+    - nosetests -sv --nologcapture tests/
 
 about:
   home: https://github.com/osvenskan/sysv_ipc
