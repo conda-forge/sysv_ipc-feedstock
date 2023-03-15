@@ -39,7 +39,7 @@ test:
   requires:
     - nose
   commands:
-    - nosetests -svx --nologcapture tests/
+    - nosetests -sv --nologcapture tests/
 
 about:
   home: https://github.com/osvenskan/sysv_ipc
