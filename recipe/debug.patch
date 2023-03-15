@@ -1,0 +1,11 @@
+diff --git a/mq.c b/mq.c
+index da50c2a..b3abb04 100644
+--- a/mq.c
++++ b/mq.c
+@@ -70,5 +70,6 @@ get_a_value(int queue_id, enum GET_SET_IDENTIFIERS field) {
+         break;
+ 
+         case SVIFP_MQ_LAST_RECEIVE_PID:
++	    printf("msg_lrpid = %d\n", q_info.msg_lrpid);
+             py_value = PID_T_TO_PY(q_info.msg_lrpid);
+         break;

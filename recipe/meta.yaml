@@ -11,6 +11,7 @@ source:
   patches:
     # AttributeError: module 'distutils.sysconfig' has no attribute 'get_config_h_filename'
     - get_config_h_filename.patch
+    - debug.patch
 
 build:
   number: 6
