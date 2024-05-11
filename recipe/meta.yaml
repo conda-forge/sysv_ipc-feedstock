@@ -14,7 +14,7 @@ source:
     - last_receive_pid_skip.patch
 
 build:
-  number: 6
+  number: 7
   script: {{ PYTHON }} -m pip install . --no-deps -vv
   skip: true  # [win]
 
@@ -25,6 +25,7 @@ requirements:
     - cython                                 # [build_platform != target_platform]
     - pybind11                               # [build_platform != target_platform]
     - {{ compiler('c') }}
+    - {{ stdlib('c') }}
   host:
     - python
     - pip
@@ -38,9 +39,9 @@ test:
     - tests
     - tests/*
   requires:
-    - nose
+    - pytest
   commands:
-    - nosetests -sv --nologcapture tests/
+    - pytest -v tests/
 
 about:
   home: https://github.com/osvenskan/sysv_ipc
