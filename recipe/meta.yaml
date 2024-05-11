@@ -25,6 +25,7 @@ requirements:
     - cython                                 # [build_platform != target_platform]
     - pybind11                               # [build_platform != target_platform]
     - {{ compiler('c') }}
+    - {{ stdlib('c') }}
   host:
     - python
     - pip
