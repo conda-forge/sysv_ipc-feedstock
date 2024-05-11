@@ -39,9 +39,9 @@ test:
     - tests
     - tests/*
   requires:
-    - nose
+    - pytest
   commands:
-    - nosetests -sv --nologcapture tests/
+    - pytest -v tests/
 
 about:
   home: https://github.com/osvenskan/sysv_ipc
