@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 0f063cbd36ec232032e425769ebc871f195a7d183b9af32f9901589ea7129ac3
   patches:
     # AttributeError: module 'distutils.sysconfig' has no attribute 'get_config_h_filename'
