@@ -1,15 +1,44 @@
---- prober.py	2019-11-03 10:05:09.000000000 -0800
-+++ prober.py	2020-12-10 14:29:15.000000000 -0800
-@@ -13,7 +13,11 @@
+diff --git a/prober.py b/prober.py
+index 9bb3f40..956cbdf 100644
+--- a/prober.py
++++ b/prober.py
+@@ -1,7 +1,7 @@
+ import os.path
+ import os
+ import subprocess
+-import distutils.sysconfig
++import sysconfig
+ 
+ # Set these to None for debugging or subprocess.PIPE to silence compiler
+ # warnings and errors.
+@@ -13,8 +13,10 @@ STDERR = subprocess.PIPE
  # This is the max length that I want a printed line to be.
  MAX_LINE_LENGTH = 78
  
 -PYTHON_INCLUDE_DIR = os.path.dirname(distutils.sysconfig.get_config_h_filename())
-+try:
-+    PYTHON_INCLUDE_DIR = os.path.dirname(distutils.sysconfig.get_config_h_filename())
-+except AttributeError:
-+    import sysconfig
-+    PYTHON_INCLUDE_DIR = os.path.dirname(sysconfig.get_config_h_filename())
- # print(PYTHON_INCLUDE_DIR)
+-# print(PYTHON_INCLUDE_DIR)
++PYTHON_INCLUDE_DIR = os.path.dirname(sysconfig.get_config_h_filename())
++# print(f"PYTHON_INCLUDE_DIR = {PYTHON_INCLUDE_DIR}")
++CC = os.environ.get('CC_FOR_BUILD', 'cc')
++# print(f"CC = ${CC}")
  
  
+ def line_wrap_paragraph(s):
+@@ -57,7 +59,7 @@ def print_bad_news(value_name, default):
+ def does_build_succeed(filename):
+     # Utility function that returns True if the file compiles and links
+     # successfully, False otherwise.
+-    cmd = "cc -Wall -I%s -o ./prober/foo ./prober/%s" %  \
++    cmd = CC + " -Wall -I%s -o ./prober/foo ./prober/%s" %  \
+                 (PYTHON_INCLUDE_DIR, filename)
+ 
+     p = subprocess.Popen(cmd, shell=True, stdout=STDOUT, stderr=STDERR)
+@@ -70,7 +72,7 @@ def does_build_succeed(filename):
+ def compile_and_run(filename, linker_options=""):
+     # Utility function that returns the stdout output from running the
+     # compiled source file; None if the compile fails.
+-    cmd = "cc -Wall -I%s -o ./prober/foo %s ./prober/%s" %  \
++    cmd = CC + " -Wall -I%s -o ./prober/foo %s ./prober/%s" %  \
+                 (PYTHON_INCLUDE_DIR, linker_options, filename)
+ 
+     p = subprocess.Popen(cmd, shell=True, stdout=STDOUT, stderr=STDERR)
