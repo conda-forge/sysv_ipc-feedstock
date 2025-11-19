@@ -1,8 +1,8 @@
 diff --git a/prober.py b/prober.py
-index 9bb3f40..a7527d8 100644
+index 9bb3f40..3d6c789 100644
 --- a/prober.py
 +++ b/prober.py
-@@ -1,20 +1,21 @@
+@@ -1,20 +1,22 @@
  import os.path
  import os
  import subprocess
@@ -26,12 +26,13 @@ index 9bb3f40..a7527d8 100644
 -PYTHON_INCLUDE_DIR = os.path.dirname(distutils.sysconfig.get_config_h_filename())
 -# print(PYTHON_INCLUDE_DIR)
 +PYTHON_INCLUDE_DIR = os.path.dirname(sysconfig.get_config_h_filename())
-+print(PYTHON_INCLUDE_DIR)
-+CC = os.environ.get('CC', 'cc')
++print(f"PYTHON_INCLUDE_DIR = {PYTHON_INCLUDE_DIR}")
++CC = os.environ.get('CC_FOR_BUILD', 'cc')
++print(f"CC = ${CC}")
  
  
  def line_wrap_paragraph(s):
-@@ -57,7 +58,7 @@ def print_bad_news(value_name, default):
+@@ -57,7 +59,7 @@ def print_bad_news(value_name, default):
  def does_build_succeed(filename):
      # Utility function that returns True if the file compiles and links
      # successfully, False otherwise.
@@ -40,7 +41,7 @@ index 9bb3f40..a7527d8 100644
                  (PYTHON_INCLUDE_DIR, filename)
  
      p = subprocess.Popen(cmd, shell=True, stdout=STDOUT, stderr=STDERR)
-@@ -70,7 +71,7 @@ def does_build_succeed(filename):
+@@ -70,7 +72,7 @@ def does_build_succeed(filename):
  def compile_and_run(filename, linker_options=""):
      # Utility function that returns the stdout output from running the
      # compiled source file; None if the compile fails.
