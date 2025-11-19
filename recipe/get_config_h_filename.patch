@@ -1,8 +1,8 @@
 diff --git a/prober.py b/prober.py
-index 9bb3f40..54d2e55 100644
+index 9bb3f40..a7527d8 100644
 --- a/prober.py
 +++ b/prober.py
-@@ -1,20 +1,20 @@
+@@ -1,20 +1,21 @@
  import os.path
  import os
  import subprocess
@@ -27,6 +27,25 @@ index 9bb3f40..54d2e55 100644
 -# print(PYTHON_INCLUDE_DIR)
 +PYTHON_INCLUDE_DIR = os.path.dirname(sysconfig.get_config_h_filename())
 +print(PYTHON_INCLUDE_DIR)
++CC = os.environ.get('CC', 'cc')
  
  
  def line_wrap_paragraph(s):
+@@ -57,7 +58,7 @@ def print_bad_news(value_name, default):
+ def does_build_succeed(filename):
+     # Utility function that returns True if the file compiles and links
+     # successfully, False otherwise.
+-    cmd = "cc -Wall -I%s -o ./prober/foo ./prober/%s" %  \
++    cmd = CC + " -Wall -I%s -o ./prober/foo ./prober/%s" %  \
+                 (PYTHON_INCLUDE_DIR, filename)
+ 
+     p = subprocess.Popen(cmd, shell=True, stdout=STDOUT, stderr=STDERR)
+@@ -70,7 +71,7 @@ def does_build_succeed(filename):
+ def compile_and_run(filename, linker_options=""):
+     # Utility function that returns the stdout output from running the
+     # compiled source file; None if the compile fails.
+-    cmd = "cc -Wall -I%s -o ./prober/foo %s ./prober/%s" %  \
++    cmd = CC + " -Wall -I%s -o ./prober/foo %s ./prober/%s" %  \
+                 (PYTHON_INCLUDE_DIR, linker_options, filename)
+ 
+     p = subprocess.Popen(cmd, shell=True, stdout=STDOUT, stderr=STDERR)
