@@ -14,7 +14,7 @@ source:
     - last_receive_pid_skip.patch
 
 build:
-  number: 11
+  number: 12
   script: {{ PYTHON }} -m pip install . --no-deps -vv
   skip: true  # [win]
 
